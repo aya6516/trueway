@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import RideEscrowArtifact from "./contracts/RideEscrow.json";
-import { HARDHAT_CHAIN_ID, RIDE_ESCROW_ADDRESS } from "./config";
+import SharedRideEscrowArtifact from "./contracts/SharedRideEscrow.json";
+import { HARDHAT_CHAIN_ID, RIDE_ESCROW_ADDRESS, SHARED_RIDE_ESCROW_ADDRESS } from "./config";
 
 export async function connectWallet() {
   if (!window.ethereum) throw new Error("MetaMask is not installed");
@@ -27,4 +28,9 @@ export async function connectWallet() {
 export async function getRideEscrowContract() {
   const { signer } = await connectWallet();
   return new ethers.Contract(RIDE_ESCROW_ADDRESS, RideEscrowArtifact.abi, signer);
+}
+
+export async function getSharedRideEscrowContract() {
+  const { signer } = await connectWallet();
+  return new ethers.Contract(SHARED_RIDE_ESCROW_ADDRESS, SharedRideEscrowArtifact.abi, signer);
 }
